@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal do Beneficiário | Atendimento e Serviços</title>
+    <meta name="description" content="Portal do Beneficiário: acesso rápido a serviços, orientações e atendimento via WhatsApp.">
+    <meta name="theme-color" content="#003664">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brandBlue: { 50: '#F0F5FA', 100: '#E1EBF5', 600: '#004B8D', 800: '#003664', 900: '#0B2545' },
+                        brandRed: { 500: '#E53935', 600: '#D32F2F', 700: '#C62828' },
+                        whatsapp: { DEFAULT: '#25D366', hover: '#1DA851' }
+                    },
+                    boxShadow: { 'premium': '0 20px 40px -10px rgba(0, 54, 100, 0.15)', 'card': '0 4px 6px -1px rgba(0, 0, 0, 0.05)' },
+                    animation: { 'fade-in': 'fadeIn 0.6s ease-out forwards', 'spin-slow': 'spin 3s linear infinite', 'bounce-subtle': 'bounceSubtle 2s infinite' },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        bounceSubtle: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-5px)' } }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-[#FAFBFC] text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-brandRed-600 selection:text-white relative">
+
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center transition-opacity duration-500" aria-live="polite" aria-busy="true">
+        <div class="relative w-20 h-20 mb-4" aria-hidden="true">
+            <div class="absolute inset-0 border-4 border-slate-100 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-brandRed-600 rounded-full border-t-transparent animate-spin"></div>
+            <div class="absolute inset-4 bg-brandBlue-800 rounded-full flex items-center justify-center text-white font-bold text-[10px] animate-pulse">
+                PORTAL
+            </div>
+        </div>
+        <p class="text-brandBlue-800 font-medium text-sm animate-bounce-subtle">Carregando...</p>
+    </div>
+
+    <!-- Barra de acessibilidade -->
+    <div class="bg-brandBlue-900 text-white text-xs py-2 border-b border-brandBlue-800">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="hidden md:flex gap-4">
+                <a href="#conteudo" class="hover:text-brandRed-600 transition">Ir para o conteúdo</a>
+                <a href="#menu" class="hover:text-brandRed-600 transition">Ir para o menu</a>
+            </div>
+
+            <div class="flex gap-4 items-center ml-auto">
+                <span class="opacity-70">Acessibilidade:</span>
+                <button type="button" onclick="mudarFonte('aumentar')" class="hover:text-brandRed-600 font-bold px-1" aria-label="Aumentar fonte">A+</button>
+                <button type="button" onclick="mudarFonte('diminuir')" class="hover:text-brandRed-600 font-bold px-1" aria-label="Diminuir fonte">A-</button>
+                <button type="button" onclick="toggleContraste()" class="hover:text-brandRed-600 flex items-center gap-1 px-1" aria-label="Ativar contraste">Contraste</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="menu" class="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-gray-100 h-20 transition-all duration-300 shadow-sm">
+        <div class="container mx-auto px-4 h-full flex items-center justify-between">
+
+            <a href="#" class="flex items-center gap-3 group hover:opacity-90 transition" aria-label="Voltar ao topo">
+                <!-- Troque por uma imagem real se quiser -->
+                <!-- <img src="SUA_LOGO.png" alt="Portal do Beneficiário" class="w-10 h-10 object-contain" /> -->
+
+                <div class="w-9 h-9 bg-brandBlue-800 rounded-lg flex items-center justify-center text-white shadow-md" aria-hidden="true">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
+                    </svg>
+                </div>
+
+                <span class="text-xl sm:text-2xl font-extrabold text-brandBlue-800 tracking-tight">
+                    Portal do <span class="text-brandRed-600">Beneficiário</span>
+                </span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8 ml-auto mr-6">
+                <nav class="flex gap-6 text-sm font-medium text-slate-600" aria-label="Menu principal">
+                    <a href="#servicos" class="nav-link hover:text-brandBlue-800 transition py-2 border-b-2 border-transparent hover:border-brandBlue-800">Serviços</a>
+                    <a href="#noticias" class="nav-link hover:text-brandBlue-800 transition py-2 border-b-2 border-transparent hover:border-brandBlue-800">Notícias</a>
+                    <button type="button" onclick="toggleModal()" class="text-slate-500 hover:text-brandBlue-800 transition font-medium">Sou Beneficiário</button>
+                </nav>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <a href="#" class="whatsapp-link flex items-center gap-2 px-6 py-2.5 rounded-full bg-whatsapp text-white font-bold text-sm hover:bg-whatsapp-hover transition shadow-lg shadow-green-500/20 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-whatsapp focus:ring-offset-2" aria-label="Atendimento via WhatsApp">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                        <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592z"/>
+                    </svg>
+                    Seja Atendido
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="conteudo" class="relative pt-10 pb-20 lg:pt-20 lg:pb-32 overflow-hidden bg-brandBlue-50">
+        <div class="absolute inset-0 z-0">
+            <div id="hero-bg" class="w-full h-full bg-cover bg-center transition-all duration-1000 transform scale-100 will-change-transform"
+                 style="background-image: url('BANNER_1_AQUI.jpg');">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent"></div>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10 flex items-center min-h-[500px]">
+            <div class="w-full lg:w-1/2 space-y-8 animate-fade-in">
+                <div id="hero-tag" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur border border-brandBlue-100 text-brandBlue-800 text-xs font-bold uppercase tracking-wider shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-brandRed-600 animate-pulse" aria-hidden="true"></span>
+                    Atualizações e Serviços
+                </div>
+
+                <h1 id="hero-title" class="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-slate-900 leading-[1.1] tracking-tight">
+                    Acesso rápido<br>
+                    <span class="text-brandBlue-800">ao que você precisa.</span>
+                </h1>
+
+                <p id="hero-desc" class="text-lg text-slate-600 leading-relaxed max-w-md">
+                    Emita segunda via, encontre orientações e fale com o atendimento em poucos cliques.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                    <a href="#" id="hero-btn" class="whatsapp-link bg-brandRed-600 text-white px-8 py-4 rounded-xl font-bold text-center hover:bg-brandRed-700 transition shadow-lg shadow-brandRed-600/30 flex items-center justify-center gap-2 hover:-translate-y-1 ring-offset-2 focus:outline-none focus:ring-2 focus:ring-brandRed-600">
+                        Atendimento no WhatsApp
+                    </a>
+                </div>
+
+                <div class="flex gap-3 mt-8" aria-label="Controle de destaque">
+                    <button type="button" onclick="changeSlide(0)" class="w-3 h-3 rounded-full bg-brandBlue-800 slider-dot active" aria-label="Slide 1"></button>
+                    <button type="button" onclick="changeSlide(1)" class="w-3 h-3 rounded-full bg-brandBlue-200 slider-dot" aria-label="Slide 2"></button>
+                    <button type="button" onclick="changeSlide(2)" class="w-3 h-3 rounded-full bg-brandBlue-200 slider-dot" aria-label="Slide 3"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA flutuante -->
+    <section class="relative z-20 -mt-16 mb-20 px-4">
+        <div class="container mx-auto bg-white rounded-2xl shadow-premium p-8 border border-slate-100 max-w-4xl flex flex-col md:flex-row items-center justify-between gap-6 transform hover:-translate-y-1 transition duration-500">
+            <div class="flex items-center gap-5">
+                <div class="w-16 h-16 rounded-full bg-whatsapp/10 flex items-center justify-center shrink-0" aria-hidden="true">
+                    <svg class="w-8 h-8 text-whatsapp" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-brandBlue-900">Precisa de atendimento rápido?</h3>
+                    <p class="text-slate-500 mt-1">Fale agora com nossa equipe pelo WhatsApp.</p>
+                </div>
+            </div>
+
+            <a href="#" class="whatsapp-link w-full md:w-auto bg-whatsapp hover:bg-whatsapp-hover text-white font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-3 transition shadow-lg shadow-green-500/20 text-lg group focus:outline-none focus:ring-2 focus:ring-whatsapp focus:ring-offset-2">
+                Chamar no WhatsApp
+                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section id="servicos" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 reveal">
+                <span class="text-brandRed-600 font-bold uppercase tracking-wider text-xs">Facilidades</span>
+                <h2 class="text-3xl font-bold text-brandBlue-900 mt-2">Acesso Rápido</h2>
+                <p class="text-slate-500 mt-3 max-w-xl mx-auto">
+                    Escolha uma opção e siga pelo atendimento. Simples, direto e com visual limpo.
+                </p>
+            </div>
+
+            <div id="servicos-container" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+        </div>
+    </section>
+
+    <!-- Notícias -->
+    <section id="noticias" class="py-20 bg-brandBlue-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-end mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold text-brandBlue-900">Saúde em Foco</h2>
+                    <p class="text-slate-500 mt-2">Artigos e novidades para o seu bem-estar.</p>
+                </div>
+                <a href="#" class="whatsapp-link hidden md:block text-brandRed-600 font-bold hover:underline">Ver tudo -></a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <a href="#" class="whatsapp-link block bg-white rounded-2xl shadow-card overflow-hidden group cursor-pointer hover:shadow-premium transition reveal">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="FOTO_NOTICIA_1.jpg" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Consulta e prevenção">
+                        <div class="absolute top-4 left-4 bg-brandRed-600 text-white text-xs font-bold px-3 py-1 rounded-full">Prevenção</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-800 mb-3 group-hover:text-brandBlue-800 transition">A importância do Check-up anual</h3>
+                        <p class="text-sm text-slate-500 line-clamp-2">Manter seus exames em dia é uma forma prática de prevenir problemas de saúde.</p>
+                        <p class="text-xs text-brandBlue-600 font-bold mt-4 uppercase">Ler no WhatsApp</p>
+                    </div>
+                </a>
+
+                <a href="#" class="whatsapp-link block bg-white rounded-2xl shadow-card overflow-hidden group cursor-pointer hover:shadow-premium transition reveal delay-100">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="FOTO_NOTICIA_2.jpg" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Atividade física e bem-estar">
+                        <div class="absolute top-4 left-4 bg-brandBlue-600 text-white text-xs font-bold px-3 py-1 rounded-full">Bem-estar</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-800 mb-3 group-hover:text-brandBlue-800 transition">Exercícios físicos na terceira idade</h3>
+                        <p class="text-sm text-slate-500 line-clamp-2">Atividades leves ajudam na mobilidade, humor e qualidade de vida.</p>
+                        <p class="text-xs text-brandBlue-600 font-bold mt-4 uppercase">Ler no WhatsApp</p>
+                    </div>
+                </a>
+
+                <a href="#" class="whatsapp-link block bg-white rounded-2xl shadow-card overflow-hidden group cursor-pointer hover:shadow-premium transition reveal delay-200">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="FOTO_NOTICIA_3.jpg" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Aplicativo e tecnologia">
+                        <div class="absolute top-4 left-4 bg-whatsapp text-white text-xs font-bold px-3 py-1 rounded-full">App</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-800 mb-3 group-hover:text-brandBlue-800 transition">Aplicativo do Beneficiário</h3>
+                        <p class="text-sm text-slate-500 line-clamp-2">Acesse serviços, orientações e informações importantes direto do celular.</p>
+                        <p class="text-xs text-brandBlue-600 font-bold mt-4 uppercase">Ler no WhatsApp</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="py-24 bg-white border-t border-slate-100">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-brandBlue-900 mb-12 reveal">O que nossos beneficiários dizem</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-brandBlue-50 p-8 rounded-2xl relative reveal">
+                    <p class="text-slate-600 italic mb-6 pt-4">"Consegui resolver tudo sem complicação. Atendimento rápido."</p>
+                    <div class="flex items-center justify-center gap-3">
+                        <div class="w-10 h-10 bg-slate-200 rounded-full overflow-hidden" aria-hidden="true">
+                            <img src="FOTO_AVATAR_1.jpg" loading="lazy" alt="" class="w-full h-full object-cover">
+                        </div>
+                        <div class="text-left">
+                            <p class="font-bold text-sm text-brandBlue-900">Maria da Silva</p>
+                            <p class="text-xs text-slate-500">Beneficiária</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-brandBlue-50 p-8 rounded-2xl relative reveal delay-100">
+                    <p class="text-slate-600 italic mb-6 pt-4">"Gostei do portal, ficou bem mais fácil acessar os serviços."</p>
+                    <div class="flex items-center justify-center gap-3">
+                        <div class="w-10 h-10 bg-slate-200 rounded-full overflow-hidden" aria-hidden="true">
+                            <img src="FOTO_AVATAR_2.jpg" loading="lazy" alt="" class="w-full h-full object-cover">
+                        </div>
+                        <div class="text-left">
+                            <p class="font-bold text-sm text-brandBlue-900">Carlos Eduardo</p>
+                            <p class="text-xs text-slate-500">Beneficiário</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-brandBlue-50 p-8 rounded-2xl relative reveal delay-200">
+                    <p class="text-slate-600 italic mb-6 pt-4">"Visual bonito e objetivo. Encontrei o que precisava rápido."</p>
+                    <div class="flex items-center justify-center gap-3">
+                        <div class="w-10 h-10 bg-slate-200 rounded-full overflow-hidden" aria-hidden="true">
+                            <img src="FOTO_AVATAR_3.jpg" loading="lazy" alt="" class="w-full h-full object-cover">
+                        </div>
+                        <div class="text-left">
+                            <p class="font-bold text-sm text-brandBlue-900">Ana Paula</p>
+                            <p class="text-xs text-slate-500">Beneficiária</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-100 pt-20 pb-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+
+                <div class="md:col-span-1 space-y-6">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 bg-brandBlue-800 rounded flex items-center justify-center text-white" aria-hidden="true">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                            </svg>
+                        </div>
+                        <span class="text-xl font-extrabold text-brandBlue-800">Portal do <span class="text-brandRed-600">Beneficiário</span></span>
+                    </div>
+
+                    <p class="text-sm text-slate-500">Canal de apoio e acesso rápido a serviços e informações importantes.</p>
+
+                    <div class="flex gap-4">
+                        <a href="#" target="_blank" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-black hover:text-white transition" aria-label="Acessar rede social X">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+
+                        <a href="#" target="_blank" class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-red-500 hover:to-purple-500 hover:text-white transition" aria-label="Acessar Instagram">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-6">Institucional</h4>
+                    <ul class="space-y-3 text-sm text-slate-500">
+                        <li><a href="sobre.html" class="hover:text-brandRed-600 transition">Sobre o Portal</a></li>
+                        <li><a href="#" class="hover:text-brandRed-600 transition">Transparência</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-6">Legal</h4>
+                    <ul class="space-y-3 text-sm text-slate-500">
+                        <li><a href="termos.html" class="hover:text-brandRed-600">Termos de Uso</a></li>
+                        <li><a href="politica.html" class="hover:text-brandRed-600">Privacidade</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-6">Contato</h4>
+                    <div class="space-y-4 text-sm text-slate-500">
+                        <p>Atendimento via WhatsApp</p>
+                        <p>Horário: Seg a Sex, 08h às 18h</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="border-t border-slate-100 pt-8 text-center text-xs text-slate-400">
+                <p>&copy; <span id="year"></span> Portal do Beneficiário.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top -->
+    <button id="backToTop" onclick="scrollToTop()" class="fixed bottom-6 right-6 bg-brandBlue-800 text-white p-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 z-40 hover:bg-brandBlue-900 focus:outline-none focus:ring-2 focus:ring-brandBlue-600 focus:ring-offset-2" aria-label="Voltar ao topo">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+        </svg>
+    </button>
+
+    <!-- Cookies -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 p-4 md:p-6 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-50 transform translate-y-full transition-transform duration-500" role="dialog" aria-label="Aviso de cookies">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-sm text-slate-600">
+                <p class="font-bold text-brandBlue-900 mb-1">Respeitamos sua privacidade</p>
+                <p>Utilizamos cookies para melhorar sua experiência. Ao navegar, você concorda com nossa <a href="politica.html" class="text-brandBlue-600 underline">Política de Privacidade</a>.</p>
+            </div>
+            <div class="flex gap-3">
+                <button type="button" onclick="acceptCookies(false)" class="text-slate-500 font-bold text-sm px-4 py-2 hover:bg-slate-50 rounded-lg transition">Recusar</button>
+                <button type="button" onclick="acceptCookies(true)" class="bg-brandBlue-800 text-white font-bold text-sm px-6 py-2 rounded-lg hover:bg-brandBlue-900 transition shadow-lg">Aceitar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal login -->
+    <div id="login-modal" class="fixed inset-0 z-[60] hidden transition-opacity duration-300" role="dialog" aria-modal="true" aria-label="Acesso do beneficiário">
+        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="toggleModal()" aria-hidden="true"></div>
+
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-2xl shadow-2xl p-8 w-full max-w-sm animate-fade-in">
+            <h3 class="text-xl font-bold text-brandBlue-900 text-center mb-6">Acesso do Beneficiário</h3>
+
+            <form class="space-y-4" onsubmit="handleLogin(event)">
+                <label class="block">
+                    <span class="sr-only">CPF</span>
+                    <input type="text" id="loginCpf" inputmode="numeric" autocomplete="username" placeholder="CPF" required class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-brandBlue-600 transition">
+                </label>
+
+                <label class="block">
+                    <span class="sr-only">Senha</span>
+                    <input type="password" autocomplete="current-password" placeholder="Senha" required class="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-brandBlue-600 transition">
+                </label>
+
+                <button type="submit" id="loginBtn" class="w-full bg-brandBlue-800 text-white py-3 rounded-lg font-bold hover:bg-brandBlue-900 transition flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-brandBlue-600 focus:ring-offset-2">
+                    <span>Entrar</span>
+                </button>
+
+                <p class="text-xs text-slate-500 text-center pt-2">
+                    Dica: se preferir, resolva tudo pelo botão de WhatsApp no topo.
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quem Somos | GEAP Saúde</title>
+    <meta name="description" content="Conheça a história da maior autogestão em saúde do Brasil.">
+    <meta name="theme-color" content="#003664">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brandBlue: { 50: '#F0F5FA', 100: '#E1EBF5', 600: '#004B8D', 800: '#003664', 900: '#0B2545' },
+                        brandRed: { 500: '#E53935', 600: '#D32F2F', 700: '#C62828' },
+                        whatsapp: { DEFAULT: '#25D366', hover: '#1DA851' }
+                    },
+                    boxShadow: { 'premium': '0 20px 40px -10px rgba(0, 54, 100, 0.15)', 'card': '0 4px 6px -1px rgba(0, 0, 0, 0.05)' },
+                    animation: { 'fade-in': 'fadeIn 0.6s ease-out forwards', 'spin-slow': 'spin 3s linear infinite', 'bounce-subtle': 'bounceSubtle 2s infinite' },
+                    keyframes: { fadeIn: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } }, bounceSubtle: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-5px)' } } }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#FAFBFC] text-slate-800 font-sans antialiased overflow-x-hidden selection:bg-brandRed-600 selection:text-white relative">
+
+    <div id="preloader" class="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center transition-opacity duration-500">
+        <div class="relative w-20 h-20 mb-4">
+            <div class="absolute inset-0 border-4 border-slate-100 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-brandRed-600 rounded-full border-t-transparent animate-spin"></div>
+            <div class="absolute inset-4 bg-brandBlue-800 rounded-full flex items-center justify-center text-white font-bold text-xs animate-pulse">GEAP</div>
+        </div>
+    </div>
+
+    <div class="bg-brandBlue-900 text-white text-xs py-2 border-b border-brandBlue-800">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="hidden md:flex gap-4">
+                <a href="index.html" class="hover:text-brandRed-600 transition">Voltar ao Início</a>
+            </div>
+            <div class="flex gap-4 items-center ml-auto">
+                <span class="opacity-70">Acessibilidade:</span>
+                <button onclick="mudarFonte('aumentar')" class="hover:text-brandRed-600 font-bold px-1">A+</button>
+                <button onclick="mudarFonte('diminuir')" class="hover:text-brandRed-600 font-bold px-1">A-</button>
+                <button onclick="toggleContraste()" class="hover:text-brandRed-600 flex items-center gap-1 px-1">Contraste</button>
+            </div>
+        </div>
+    </div>
+
+    <header id="menu" class="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-gray-100 h-20 transition-all duration-300 shadow-sm">
+        <div class="container mx-auto px-4 h-full flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 group hover:opacity-90 transition">
+                 <div class="w-9 h-9 bg-brandBlue-800 rounded-lg flex items-center justify-center text-white shadow-md">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+                 </div>
+                <span class="text-2xl font-extrabold text-brandBlue-800 tracking-tight">GEAP<span class="text-brandRed-600">Saúde</span></span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8 ml-auto mr-6">
+                <nav class="flex gap-6 text-sm font-medium text-slate-600">
+                    <a href="index.html" class="hover:text-brandBlue-800 transition">Início</a>
+                    <span class="text-brandRed-600 font-bold cursor-default">Quem Somos</span>
+                    <a href="index.html#servicos" class="hover:text-brandBlue-800 transition">Serviços</a>
+                </nav>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <a href="#" class="whatsapp-link flex items-center gap-2 px-6 py-2.5 rounded-full bg-whatsapp text-white font-bold text-sm hover:bg-whatsapp-hover transition shadow-lg shadow-green-500/20 transform hover:-translate-y-0.5">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592z"/></svg>
+                    Seja Atendido
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative pt-20 pb-32 overflow-hidden bg-brandBlue-900 text-white">
+        <div class="absolute inset-0 z-0 opacity-20">
+             <img src="FOTO_INSTITUCIONAL_HERO.jpg" class="w-full h-full object-cover" alt="Foto Institucional GEAP">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-b from-brandBlue-900 via-brandBlue-900/90 to-brandBlue-900"></div>
+
+        <div class="container mx-auto px-4 relative z-10 text-center max-w-4xl">
+            <span class="inline-block py-1 px-3 rounded-full bg-brandRed-600/20 border border-brandRed-600 text-brandRed-500 text-xs font-bold uppercase tracking-wider mb-6 animate-fade-in">Nossa História</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight animate-fade-in">
+                Mais de 75 anos de <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">dedicação ao servidor.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-brandBlue-100 leading-relaxed animate-fade-in delay-100">
+                Somos a maior operadora de autogestão em saúde do Brasil. Uma fundação sem fins lucrativos, criada para cuidar de quem serve o nosso país.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white -mt-16 relative z-20">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+                <div class="bg-white p-8 rounded-2xl shadow-premium border-b-4 border-brandBlue-800 hover:-translate-y-2 transition duration-300 reveal">
+                    <div class="w-14 h-14 bg-brandBlue-50 rounded-xl flex items-center justify-center text-brandBlue-800 mb-6">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-brandBlue-900 mb-3">Missão</h3>
+                    <p class="text-slate-500 leading-relaxed">Promover a assistência à saúde aos beneficiários, com qualidade, ética e sustentabilidade.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-premium border-b-4 border-brandRed-600 hover:-translate-y-2 transition duration-300 reveal delay-100">
+                    <div class="w-14 h-14 bg-brandRed-50 rounded-xl flex items-center justify-center text-brandRed-600 mb-6">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-brandBlue-900 mb-3">Visão</h3>
+                    <p class="text-slate-500 leading-relaxed">Ser referência nacional em autogestão de saúde, reconhecida pela excelência no cuidado.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-premium border-b-4 border-brandBlue-800 hover:-translate-y-2 transition duration-300 reveal delay-200">
+                    <div class="w-14 h-14 bg-brandBlue-50 rounded-xl flex items-center justify-center text-brandBlue-800 mb-6">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-brandBlue-900 mb-3">Valores</h3>
+                    <p class="text-slate-500 leading-relaxed">Solidariedade, Transparência, Ética, Inovação e Foco no Beneficiário.</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row items-center gap-16 reveal">
+                <div class="w-full lg:w-1/2">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
+                        <img src="geap.png" class="w-full h-full object-cover" alt="Nossa História">
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 space-y-6">
+                    <h2 class="text-3xl font-bold text-brandBlue-900">História de Dedicação</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        A GEAP Autogestão em Saúde é uma das mais importantes operadoras de planos de saúde do Brasil. Fundada em 1945, nascemos com o propósito de cuidar da saúde dos servidores públicos federais ativos, aposentados e seus familiares.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed">
+                        Sem fins lucrativos, reinvestimos todos os nossos recursos na melhoria da assistência. Contamos com uma rede de milhares de prestadores, incluindo os melhores hospitais, clínicas e laboratórios do país.
+                    </p>
+                    <div class="pt-4">
+                        <a href="#" class="whatsapp-link text-brandRed-600 font-bold hover:underline flex items-center gap-2">
+                            Falar com um consultor
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-brandBlue-50 border-y border-brandBlue-100">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-brandBlue-200/50">
+                <div class="reveal">
+                    <span class="block text-4xl font-extrabold text-brandBlue-800 mb-2">78+</span>
+                    <span class="text-sm text-slate-500 font-medium uppercase tracking-wide">Anos de História</span>
+                </div>
+                <div class="reveal delay-100">
+                    <span class="block text-4xl font-extrabold text-brandBlue-800 mb-2">300k+</span>
+                    <span class="text-sm text-slate-500 font-medium uppercase tracking-wide">Beneficiários</span>
+                </div>
+                <div class="reveal delay-200">
+                    <span class="block text-4xl font-extrabold text-brandBlue-800 mb-2">18k+</span>
+                    <span class="text-sm text-slate-500 font-medium uppercase tracking-wide">Prestadores</span>
+                </div>
+                <div class="reveal delay-200">
+                    <span class="block text-4xl font-extrabold text-brandBlue-800 mb-2">UF</span>
+                    <span class="text-sm text-slate-500 font-medium uppercase tracking-wide">Presença Nacional</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t border-slate-100 pt-20 pb-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="md:col-span-1 space-y-6">
+                    <div class="flex items-center gap-2">
+                         <div class="w-8 h-8 bg-brandBlue-800 rounded flex items-center justify-center text-white">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+                         </div>
+                        <span class="text-xl font-extrabold text-brandBlue-800">GEAP<span class="text-brandRed-600">Saúde</span></span>
+                    </div>
+                    <p class="text-sm text-slate-500">Cuidando da saúde dos servidores públicos há mais de 75 anos.</p>
+                </div>
+                <div><h4 class="font-bold text-slate-800 mb-6">Institucional</h4><ul class="space-y-3 text-sm text-slate-500"><li><a href="sobre.html" class="hover:text-brandRed-600 transition font-bold text-brandBlue-800">Sobre a GEAP</a></li><li><a href="#" class="hover:text-brandRed-600 transition">Transparência</a></li></ul></div>
+                <div><h4 class="font-bold text-slate-800 mb-6">Legal</h4><ul class="space-y-3 text-sm text-slate-500"><li><a href="termos.html" class="hover:text-brandRed-600">Termos de Uso</a></li><li><a href="politica.html" class="hover:text-brandRed-600">Privacidade</a></li></ul></div>
+                <div><h4 class="font-bold text-slate-800 mb-6">Contato</h4><div class="space-y-4 text-sm text-slate-500"><p>Brasília/DF</p><p>CNPJ: 03.658.422/0001-90</p></div></div>
+            </div>
+            <div class="border-t border-slate-100 pt-8 text-center text-xs text-slate-400">
+                <p>&copy; <span id="year"></span> GEAP Autogestão em Saúde.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" onclick="scrollToTop()" class="fixed bottom-6 right-6 bg-brandBlue-800 text-white p-3 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 z-40 hover:bg-brandBlue-900 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
+    </button>
+
+    <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 p-4 md:p-6 shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-50 transform translate-y-full transition-transform duration-500">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="text-sm text-slate-600">
+                <p class="font-bold text-brandBlue-900 mb-1">Respeitamos sua privacidade</p>
+                <p>Utilizamos cookies para melhorar sua experiência.</p>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="acceptCookies(false)" class="text-slate-500 font-bold text-sm px-4 py-2 hover:bg-slate-50 rounded-lg transition">Recusar</button>
+                <button onclick="acceptCookies(true)" class="bg-brandBlue-800 text-white font-bold text-sm px-6 py-2 rounded-lg hover:bg-brandBlue-900 transition shadow-lg">Aceitar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+    <script>
+        // Esconde o loader quando a página carrega
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            if(preloader) {
+                preloader.style.opacity = '0';
+                setTimeout(() => preloader.style.display = 'none', 500);
+            }
+        });
+        // Atualiza o ano no rodapé
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

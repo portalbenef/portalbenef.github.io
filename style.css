@@ -1,0 +1,132 @@
+/* =========================================
+   1. COMPORTAMENTO GLOBAL
+   ========================================= */
+html { 
+  scroll-behavior: smooth; 
+}
+
+/* =========================================
+   2. SCROLLBAR CUSTOMIZADA (Premium)
+   ========================================= */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #f3f4f6; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* Firefox */
+* { scrollbar-width: thin; scrollbar-color: #cbd5e1 #f3f4f6; }
+
+/* =========================================
+   3. ACESSIBILIDADE / DARK MODE
+   - Seu darkMode é aplicado na tag <html class="dark">
+   ========================================= */
+
+/* Base */
+.dark body {
+  background-color: #0b1220; /* navy bem escuro */
+  color: #f8fafc;
+}
+
+/* Corrige bg do body quando você usa bg-[#FAFBFC] */
+.dark .bg-\[\#FAFBFC\] { background-color: #0b1220; }
+
+/* Cards e superfícies */
+.dark .bg-white {
+  background-color: #111a2b;
+  color: #f8fafc;
+}
+
+/* Seções claras tipo brandBlue-50 */
+.dark .bg-brandBlue-50 { background-color: #0f1a2e; }
+
+/* Textos */
+.dark .text-slate-800 { color: #f8fafc; }
+.dark .text-slate-600 { color: #cbd5e1; }
+.dark .text-slate-500 { color: #94a3b8; }
+.dark .text-slate-400 { color: #94a3b8; }
+
+/* Bordas */
+.dark .border-slate-100 { border-color: rgba(148, 163, 184, 0.22); }
+.dark .border-slate-200 { border-color: rgba(148, 163, 184, 0.22); }
+.dark .border-gray-100 { border-color: rgba(148, 163, 184, 0.18); }
+
+/* Inputs */
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: rgba(255,255,255,0.03) !important;
+  border-color: rgba(148, 163, 184, 0.25) !important;
+  color: #f8fafc !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: rgba(148, 163, 184, 0.75);
+}
+
+/* Backdrop blur headers / overlays */
+.dark .backdrop-blur-xl { background-color: rgba(17, 26, 43, 0.75) !important; }
+
+/* =========================================
+   4. ANIMAÇÕES (Scroll Reveal)
+   ========================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-100 { transition-delay: 0.12s; }
+.delay-200 { transition-delay: 0.22s; }
+
+/* Slider dot */
+.slider-dot.active { transform: scale(1.25); }
+
+/* =========================================
+   5. BOTÃO VOLTAR AO TOPO
+   ========================================= */
+#backToTop {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: all 0.25s ease;
+}
+
+#backToTop.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* =========================================
+   6. COOKIES
+   - IMPORTANTE: removi #cookie-banner.show
+   - O JS atualizado usa Tailwind: translate-y-full ⇄ translate-y-0
+   ========================================= */
+
+/* Nada aqui de show, para não conflitar com Tailwind */
+
+/* =========================================
+   7. PEQUENOS POLIMENTOS
+   ========================================= */
+
+/* Deixa imagens sempre bem comportadas */
+img { max-width: 100%; height: auto; }
+
+/* Evita “piscada” na troca do slider (suave) */
+#hero-bg {
+  filter: saturate(1.02) contrast(1.02);
+  transition: background-image 0.6s ease;
+}
+
+/* Melhor foco pra acessibilidade */
+:focus-visible {
+  outline: 3px solid rgba(0, 75, 141, 0.35);
+  outline-offset: 3px;
+}
